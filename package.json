@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "formik": "^2.2.9",
+    "mongodb": "^4.5.0",
+    "next": "latest",
+    "react": "^17.0.2",
+    "react-bootstrap": "^1.0.1",
+    "react-dom": "^17.0.2",
+    "victory": "^36.3.1",
+    "yup": "^0.32.11"
+  }
+}

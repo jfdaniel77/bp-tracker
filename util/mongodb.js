@@ -44,7 +44,7 @@ export async function fetchData() {
 
   // Options
   const options = {
-    sort: { dateTaken: -1 },
+    sort: { dateTaken: 1 },
     projection: {"_id": 0},
   };
 

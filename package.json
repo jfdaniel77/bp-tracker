@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@sentry/nextjs": "^6.19.6",
     "bootstrap": "^4.4.1",
     "formik": "^2.2.9",
     "mongodb": "^4.5.0",

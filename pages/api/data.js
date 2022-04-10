@@ -1,12 +1,8 @@
+import { withSentry } from "@sentry/nextjs";
 import { fetchData, saveData } from "../../util/mongodb";
 
-export async function getData() {
-    const response = await fetchData()
-    return await response
-}
-
-export default async function handler(req, res) {
-    const jsonData = await getData()
+const handler = async (req, res) => {
+    const jsonData = await fetchData()
     if (jsonData) {
         res.status(200).json(jsonData)
     } else {
@@ -14,4 +10,6 @@ export default async function handler(req, res) {
             message: "No data found"
         })
     }
-}
+};
+
+export default withSentry(handler);

@@ -7,7 +7,7 @@ import ChartResult from './../component/chartResult'
 import Footer from './../component/footer'
 import TableResult from './../component/tableResult'
 
-import { getData } from "./api/data";
+import { getData } from "./../util/initial";
 
 // This gets called on every request
 export async function getServerSideProps() {

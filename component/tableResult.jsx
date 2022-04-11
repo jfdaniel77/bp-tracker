@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table'
 export default function TableResult(props) {
 
     const { data } = props
+    var orderedData = data.sort((a, b) => (a.timestamp > b.timestamp) ? -1 : 1)
     
     return (
         
@@ -16,19 +17,19 @@ export default function TableResult(props) {
                 </tr>
             </thead>
             <tbody>
-            { !data
+            { !orderedData
                 ? (
                   <tr >
                     <td colSpan="3"><i>Loading...</i></td>
                   </tr>
                 )
-                : (data.length === 0
+                : (orderedData.length === 0
                   ? (
                     <tr >
                       <td colSpan="3">Data is not available</td>
                     </tr>
                   )
-                  : data.map((item, index) => (
+                  : orderedData.map((item, index) => (
             
                     <tr key={index}>
                     <td>{item.dateTaken}</td>

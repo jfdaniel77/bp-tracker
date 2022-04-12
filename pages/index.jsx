@@ -1,27 +1,28 @@
-import Head from 'next/head'
-import { useState } from 'react'
-import { Container, Row } from 'react-bootstrap'
+import Head from "next/head";
+import { useState } from "react";
+import { Container, Row } from "react-bootstrap";
 
-import InputForm from './../component/inputForm'
-import ChartResult from './../component/chartResult'
-import Footer from './../component/footer'
-import TableResult from './../component/tableResult'
+import InputForm from "./../component/inputForm";
+import ChartResult from "./../component/chartResult";
+import Footer from "./../component/footer";
+import TableResult from "./../component/tableResult";
+import Header from "./../component/header";
 
 import { getData } from "./../util/initial";
 
 // This gets called on every request
 export async function getServerSideProps() {
-  console.log("Fetch data from MongoDB Atlas.... ")
-  
   // Fetch data from external API
-  const res = await getData()
-  const data = await res
+  const res = await getData();
+  const data = await res;
 
   // Pass data to the page via props
-  return { props: { data } }
+  return { props: { data } };
 }
 
-export default function Home({data}) {
+export default function Home({ data }) {
+  const [displayTable, setDisplayTable] = useState(false)
+  const [displayChart, setDisplayChart] = useState(false)
 
   return (
     <Container className="md-container">
@@ -30,31 +31,33 @@ export default function Home({data}) {
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
       <Container>
-        <div className="left-header">
-        <h1>
-          Welcome to BP - Tracker!
-        </h1>
-        
-        </div>
-        <div className='left-intro'>
-        <p>
-          Get started by inputting your result...
-        </p>
-        </div>
-        <Container>
-          <Row className="justify-content-md-between">
+       <Header />
+        <Container fluid>
+          <Row className="justify-content-center">
             <InputForm />
           </Row>
-          <Row className="justify-content-md-between">
-            { data && <TableResult data={data}/> }
-          </Row>
-          <Row className="justify-content-md-between">
-            { data && <ChartResult data={data}/>}
-          </Row>
+          {displayTable && data && (
+            <Row className="justify-content-md-between">
+              <Container>
+                <Row>
+                  <TableResult data={data} />
+                </Row>
+              </Container>
+            </Row>
+          )}
+          {displayChart && data && (
+            <Row className="justify-content-md-between">
+              <Container>
+                <Row>
+                  <ChartResult data={data} />
+                </Row>
+              </Container>
+            </Row>
+          )}
         </Container>
       </Container>
 
-     <Footer />
+      <Footer />
     </Container>
-  )
+  );
 }

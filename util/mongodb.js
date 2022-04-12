@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.DB_URI
+const uri = process.env.DB_URI;
 
 var database = null;
 
@@ -30,6 +30,38 @@ export async function saveData(data) {
   return resp;
 }
 
+export async function fetchDataByDate(date) {
+  // Check MongoDB connection
+  if (!database) {
+    await getConnection();
+  }
+
+  // Define collection
+  const collection = database.collection("bp_tracker");
+ 
+  // Query
+  const query = {dateTaken: date};
+
+  // Options
+  const options = {
+    sort: { timestamp: -1 },
+    projection: { _id: 0 },
+  };
+
+  const cursor = collection.find(query, options);
+  // print a message if no documents were found
+  if ((await collection.countDocuments()) === 0) {
+    console.log("No documents found!");
+    return []
+  }
+
+  var data = [];
+  while (await cursor.hasNext()) {
+    data.push(await cursor.next());
+  }
+  return data;
+}
+
 export async function fetchData() {
   // Check MongoDB connection
   if (!database) {
@@ -45,7 +77,7 @@ export async function fetchData() {
   // Options
   const options = {
     sort: { timestamp: -1 },
-    projection: {"_id": 0},
+    projection: { _id: 0 },
   };
 
   // Fetch document(s)
@@ -54,6 +86,7 @@ export async function fetchData() {
   // print a message if no documents were found
   if ((await collection.countDocuments()) === 0) {
     console.log("No documents found!");
+    return []
   }
 
   var data = [];

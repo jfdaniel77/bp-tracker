@@ -31,7 +31,7 @@ function getTodayDate() {
   return [year, month, day].join("-");
 }
 
-export default function InputForm() {
+export default function InputForm({ handleNewData }) {
   const [displayMessage, setDisplayMessage] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
@@ -45,8 +45,7 @@ export default function InputForm() {
       }}
       validationSchema={FormSchema}
       onSubmit={async function (values) {
-        console.log(values);
-        const resp = await fetch("/api/data", {
+        await fetch("/api/data", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -65,6 +64,16 @@ export default function InputForm() {
               setError(false);
             }
           });
+
+        await fetch("/api/data", {
+          method: "GET",
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((newData) => {
+            handleNewData(newData);
+          });
       }}
     >
       {({
@@ -77,7 +86,7 @@ export default function InputForm() {
       }) => (
         <Form>
           {displayMessage && (
-            <Alert variant={error ? "danger": "success"}>
+            <Alert variant={error ? "danger" : "success"}>
               <Alert.Heading>Note</Alert.Heading>
               <p>{message}</p>
             </Alert>

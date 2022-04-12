@@ -14,15 +14,20 @@ import { getData } from "./../util/initial";
 export async function getServerSideProps() {
   // Fetch data from external API
   const res = await getData();
-  const data = await res;
+  const initialData = await res;
 
   // Pass data to the page via props
-  return { props: { data } };
+  return { props: { initialData } };
 }
 
-export default function Home({ data }) {
-  const [displayTable, setDisplayTable] = useState(false)
+export default function Home({ initialData }) {
+  const [displayTable, setDisplayTable] = useState(true)
   const [displayChart, setDisplayChart] = useState(false)
+  const [data, setData] = useState(initialData)
+
+  const changeDate = (newData) => {
+    setData(newData)
+  }
 
   return (
     <Container className="md-container">
@@ -34,7 +39,7 @@ export default function Home({ data }) {
        <Header />
         <Container fluid>
           <Row className="justify-content-center">
-            <InputForm />
+            <InputForm handleNewData={changeDate}/>
           </Row>
           {displayTable && data && (
             <Row className="justify-content-md-between">

@@ -4,7 +4,8 @@ import Table from 'react-bootstrap/Table'
 export default function TableResult(props) {
 
     const { data } = props
-    var orderedData = data.sort((a, b) => (a.timestamp > b.timestamp) ? -1 : 1)
+    var orderedData = [...data]
+    orderedData.sort((a, b) => (a.timestamp > b.timestamp) ? -1 : 1)
     
     return (
         

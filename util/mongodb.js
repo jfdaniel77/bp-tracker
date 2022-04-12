@@ -44,7 +44,7 @@ export async function fetchData() {
 
   // Options
   const options = {
-    sort: { timestamp: 1 },
+    sort: { timestamp: -1 },
     projection: {"_id": 0},
   };
 

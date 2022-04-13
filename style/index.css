@@ -6,6 +6,11 @@
   padding-top: 2rem;
 }
 
+.md-container-table {
+  max-width: 800px;
+  padding-top: 4rem;
+}
+
 .sml-card {
   width: 22rem;
   margin: 1rem 0;
@@ -36,6 +41,16 @@
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #ccc;
+}
+
+.center-header-table {
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
 }
 
 .sml-logo {

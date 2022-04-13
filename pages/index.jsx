@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 
 import InputForm from "./../component/inputForm";
-import ChartResult from "./../component/chartResult";
 import Footer from "./../component/footer";
 import TableResult from "./../component/tableResult";
 import Header from "./../component/header";
@@ -21,13 +20,12 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ initialData }) {
-  const [displayTable, setDisplayTable] = useState(true)
-  const [displayChart, setDisplayChart] = useState(false)
-  const [data, setData] = useState(initialData)
+  const [displayTable, setDisplayTable] = useState(true);
+  const [data, setData] = useState(initialData);
 
-  const changeDate = (newData) => {
-    setData(newData)
-  }
+  const changeData = (newData) => {
+    setData(newData);
+  };
 
   return (
     <Container className="md-container">
@@ -36,25 +34,19 @@ export default function Home({ initialData }) {
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
       <Container>
-       <Header />
+        <Header />
         <Container fluid>
           <Row className="justify-content-center">
-            <InputForm handleNewData={changeDate}/>
+            <InputForm handleNewData={changeData} />
           </Row>
           {displayTable && data && (
             <Row className="justify-content-md-between">
-              <Container>
+              <Container className="md-container-table">
+                <Row className="center-header-table">
+                  <hi>List of Records</hi>
+                </Row>
                 <Row>
                   <TableResult data={data} />
-                </Row>
-              </Container>
-            </Row>
-          )}
-          {displayChart && data && (
-            <Row className="justify-content-md-between">
-              <Container>
-                <Row>
-                  <ChartResult data={data} />
                 </Row>
               </Container>
             </Row>

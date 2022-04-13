@@ -86,7 +86,7 @@ export default function InputForm({ handleNewData }) {
       }) => (
         <Form>
           {displayMessage && (
-            <Alert variant={error ? "danger" : "success"}>
+            <Alert className="mb-2" variant={error ? "danger" : "success"}>
               <Alert.Heading>Note</Alert.Heading>
               <p>{message}</p>
             </Alert>

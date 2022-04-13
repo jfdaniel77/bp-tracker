@@ -6,7 +6,6 @@ export default function TableResult(props) {
     const { data } = props
     
     return (
-        
         <Table striped bordered hover>
             <thead>
                 <tr>

@@ -6,7 +6,7 @@ function prepareRecord(data) {
     dateTaken: data.date,
     systolic: data.systolic,
     diastolic: data.diastolic,
-    timestamp: new Date().getTime(),
+    timestamp: Date.parse(new Date(data.date)),
   };
 }
 
